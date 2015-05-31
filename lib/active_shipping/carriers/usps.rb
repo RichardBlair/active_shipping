@@ -348,11 +348,11 @@ module ActiveShipping
       country = COUNTRY_NAME_CONVERSIONS[destination.country.code(:alpha2).value] || destination.country.name
       xml_builder = Nokogiri::XML::Builder.new do |xml|
         xml.IntlRateV2Request('USERID' => @options[:login]) do
-          if country == "Canada"
-            xml.OriginZip(origin.zip)
-          end
           Array(packages).each_with_index do |package, id|
             xml.Package('ID' => id) do
+              if country == "Canada"
+                xml.OriginZip(origin.zip)
+              end
               xml.Pounds(0)
               xml.Ounces([package.ounces, 1].max.ceil) # takes an integer for some reason, must be rounded UP
               xml.MailType(MAIL_TYPES[package.options[:mail_type]] || 'Package')
