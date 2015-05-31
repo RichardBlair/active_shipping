@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <IntlRateV2Request USERID="login">
+  <OriginZip>90210</OriginZip>
   <Package ID="0">
     <Pounds>0</Pounds>
     <Ounces>120</Ounces>
